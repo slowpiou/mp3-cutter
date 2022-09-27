@@ -12,7 +12,7 @@ function createWindow() {
 			nodeIntegration: true,
 			preload: path.join(__dirname, 'preload.js'),
 		},
-		// skipTaskbar: true,
+		skipTaskbar: true,
 	});
 	win.webContents.openDevTools();
 	win.loadFile('index.html');
@@ -22,17 +22,16 @@ function createWindow() {
 	ipcMain.on(
 		'cut',
 		(event, inputs) => {
-			console.log(inputs);
 			let filePath = fileURLToPath(inputs.url);
 			async.eachOf(inputs.tracks, (i, key, callback) => {
-				console.log(i);
-				let title = i.title.length ? i.title : key + 1;
+				let title = i.title.length ? (key.toString() > 1 ? `${key + 1} - ${i.title}` : `0${key + 1} - ${i.title}`) : key + 1;
 				ffmpeg(filePath)
 					.on('error', (err) => {
 						console.log('FFMpeg ERROR');
 						return callback(err);
 					})
 					.on('end', () => {
+						let file = path.join(__dirname, `assets/audio/${title}.mp3`);
 						// NodeID3
 						console.log(`Cutting ${key + 1} completed`);
 						return callback(null);
