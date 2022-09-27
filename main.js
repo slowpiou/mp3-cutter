@@ -13,11 +13,11 @@ function createWindow() {
 			nodeIntegration: true,
 			preload: path.join(__dirname, 'preload.js'),
 		},
-		skipTaskbar: true,
 	});
-	win.webContents.openDevTools();
+	// win.webContents.openDevTools();
 	win.loadFile('index.html');
 	win.setPosition(-1920, 200);
+	win.setMenu(null);
 	win.maximize();
 
 	ipcMain.on('cut', (event, inputs) => {
