@@ -1,0 +1,26 @@
+{
+	"name": "mp3-cutter",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/slowpiou/mp3-cutter.git"
+	},
+	"author": "slowpiou",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/slowpiou/mp3-cutter/issues"
+	},
+	"homepage": "https://github.com/slowpiou/mp3-cutter#readme",
+	"devDependencies": {
+		"electron": "^21.0.0"
+	},
+	"dependencies": {
+		"async": "^3.2.4",
+		"fluent-ffmpeg": "^2.1.2"
+	}
+}
