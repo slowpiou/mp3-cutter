@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "main.js",
 	"scripts": {
-		"start": "electron ."
+		"start": "electron .",
+		"build": "electron-packager . --overwrite"
 	},
 	"repository": {
 		"type": "git",
@@ -17,7 +18,8 @@
 	},
 	"homepage": "https://github.com/slowpiou/mp3-cutter#readme",
 	"devDependencies": {
-		"electron": "^21.0.0"
+		"electron": "^21.0.0",
+		"electron-packager": "^16.0.0"
 	},
 	"dependencies": {
 		"async": "^3.2.4",
