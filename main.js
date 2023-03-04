@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const { fileURLToPath } = require('node:url');
 const async = require('async');
@@ -55,7 +55,11 @@ function createWindow() {
 			function (err) {
 				if (err) return console.log(err);
 				console.log('Cuttings Completed');
-				win.webContents.send('cut-done');
+				dialog.showMessageBox(win, {
+					type: 'question',
+					title: 'mp3-cutter',
+					message: 'All Good! :)',
+				});
 			}
 		);
 	});
