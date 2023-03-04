@@ -9,6 +9,7 @@ function createWindow() {
 	let win = new BrowserWindow({
 		width: 1920,
 		height: 1000,
+		icon: path.join(__dirname, 'assets/images/icon.png'),
 		webPreferences: {
 			nodeIntegration: true,
 			preload: path.join(__dirname, 'preload.js'),
@@ -25,8 +26,7 @@ function createWindow() {
 		async.eachOf(
 			inputs.tracks,
 			(i, key, callback) => {
-				let title = i.title.length ? (key.toString() > 1 ? `${key + 1} - ${i.title}` : `0${key + 1} - ${i.title}`) : key + 1;
-				let titleID3 = i.title.length ? i.title : key + 1;
+				let title = i.title.length ? i.title : key + 1;
 				ffmpeg(filePath)
 					.on('error', (err) => {
 						console.log('FFMpeg ERROR');
@@ -44,7 +44,7 @@ function createWindow() {
 						if (inputs.artist) {
 							NodeID3.update({ artist: inputs.artist, performerInfo: inputs.artist }, file);
 						}
-						NodeID3.update({ title: titleID3, trackNumber: key + 1 }, file);
+						NodeID3.update({ title: title, trackNumber: key + 1 }, file);
 
 						console.log(`Cutting ${key + 1} completed`);
 						return callback(null);
@@ -55,6 +55,7 @@ function createWindow() {
 			function (err) {
 				if (err) return console.log(err);
 				console.log('Cuttings Completed');
+				win.webContents.send('cut-done');
 			}
 		);
 	});

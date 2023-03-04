@@ -205,4 +205,7 @@
 		});
 		window.electronAPI.cut(inputs);
 	});
+	window.electronAPI.onCutDone((_event, value) => {
+		alert('All Good !');
+	});
 })(peaks);
