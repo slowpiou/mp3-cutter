@@ -53,12 +53,20 @@ function createWindow() {
 					.save(path.join(__dirname, `assets/audio/${title}.mp3`));
 			},
 			function (err) {
-				if (err) return console.log(err);
+				if (err) {
+					dialog.showMessageBox(win, {
+						type: 'warning',
+						title: 'mp3-cutter',
+						message: 'Oops, something went wrong! :/',
+					});
+					return console.log(err);
+				}
 				console.log('Cuttings Completed');
 				dialog.showMessageBox(win, {
 					type: 'question',
 					title: 'mp3-cutter',
 					message: 'All Good! :)',
+					icon: path.join(__dirname, 'assets/images/icon.png'),
 				});
 			}
 		);
