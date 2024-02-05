@@ -156,11 +156,11 @@
 		// Events
 		peaks.on('segments.add', (segment) => {
 			newTrack(
-				segment[0].id,
+				segment.segments[0].id,
 				peaks.segments.getSegments().length,
-				getHours(segment[0].endTime),
-				getMinutes(segment[0].endTime),
-				getSeconds(segment[0].endTime)
+				getHours(segment.segments[0].endTime),
+				getMinutes(segment.segments[0].endTime),
+				getSeconds(segment.segments[0].endTime)
 			);
 		});
 		peaks.on('segments.remove', () => {
